@@ -1,0 +1,1 @@
+COUNT(DISTINCT CONCAT(user_pseudo_id, ga_session_id))
