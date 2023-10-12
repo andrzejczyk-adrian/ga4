@@ -1,0 +1,12 @@
+/* odnosi się do danych z ga4 transformed */
+
+LAST_VALUE(source IGNORE NULLS) OVER(
+    PARTITION BY CONCAT(user_pseudo_id, CAST(ga_session_id AS STRING))
+    ORDER BY event_timestamp ASC
+    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+  ) AS session_source,
+  LAST_VALUE(medium IGNORE NULLS) OVER(
+    PARTITION BY CONCAT(user_pseudo_id, CAST(ga_session_id AS STRING))
+    ORDER BY event_timestamp ASC
+    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+  ) AS session_medium
