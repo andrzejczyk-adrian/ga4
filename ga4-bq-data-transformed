@@ -1,6 +1,6 @@
 DELETE
 FROM
-  `triverna-datawarehouse.ga4_transformed.events_transformed`
+  `dataset`
 WHERE
   event_date BETWEEN DATE_SUB(DATE(@run_date), INTERVAL 10 DAY)
   AND DATE_SUB(DATE(@run_date), INTERVAL 1 DAY);
@@ -282,7 +282,7 @@ SELECT
   END AS previous_add_payment_info_timestamp,
   (SELECT value.int_value FROM UNNEST (event_params) WHERE key = 'los') AS length_of_stay
 FROM
-  `triverna-datawarehouse.analytics_298964636.events_*`
+  `dataset.events_*`
 WHERE
   _table_suffix BETWEEN FORMAT_DATE("%Y%m%d", DATE_SUB(DATE(@run_date), INTERVAL 10 DAY))
   AND FORMAT_DATE("%Y%m%d", DATE_SUB(DATE(@run_date), INTERVAL 1 DAY))
